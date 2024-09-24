@@ -38,17 +38,14 @@ export const updateUser = async(uid, user_data) => {
     const { user_name, user_email, user_contact, user_password, user_role, user_status } = user_data;
     try{
         const existingUserQuery = `SELECT * FROM users WHERE (user_email = ? OR user_contact = ?) AND user_id != ?`;
-        const [existingUser] = await connection.query(existingUserQuery, [user_email, user_contact, user_id]);
+        const [existingUser] = await connection.query(existingUserQuery, [user_email, user_contact, uid]);
         if(existingUser.length > 0) {
             const existingField = existingUser[0].user_email === user_email ? "email" : "contact";
             return { success: false, message: `${existingField.charAt(0).toUpperCase() + existingField.slice(1)} already exists.`};
         }
         const getSpecificuser = `SELECT user_email FROM users WHERE user_email = ? OR user_contact = ?`;
-        const query = `Update users 
-            SET user_name = ?, user_email = ?, user_contact = ?, user_password = ?, user_role = ?, user_status = ?
-            WHERE user_id = ?
-        `;
-        await connection.execute(query, [user_name, user_email, user_contact, user_password, user_role, user_status]);
+        const query = `Update users SET user_name = ?, user_email = ?, user_contact = ?, user_password = ?, user_role = ?, user_status = ? WHERE user_id = ?`;
+        await connection.execute(query, [user_name, user_email, user_contact, user_password, user_role, user_status, uid]);
         return { success: true, message: "User updated successfully." };
     }
     catch(err){
@@ -61,8 +58,8 @@ export const updateUser = async(uid, user_data) => {
 };
 
 export const deleteUser = async (uid) => {
-    const connection = getConnection();
+    const connection = await getConnection();
     const query = `DELETE FROM users WHERE user_id = ?`;
-    await connection.execute(queery, [uid]);
+    await connection.execute(query, [uid]);
     await connection.end();
 };

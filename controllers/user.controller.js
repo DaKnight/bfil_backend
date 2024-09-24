@@ -15,7 +15,7 @@ export const registeUser = async (req, res) => {
 export const getAllUser = async (req, res) => {
     try{
         const users = await getAllUsers(req.params.id);
-        if(!user){
+        if(!users){
             return res.status(404).json({ message: "User not found!" });
         }
         res.status(200).json(users);
