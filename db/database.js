@@ -1,4 +1,4 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 
 const createDatabase = 'CREATE DATABASE IF NOT EXISTS BFIL';
 const createUserTable = `CREATE TABLE IF NOT EXISTS users (
@@ -46,6 +46,9 @@ async function connectDb(){
     }
     catch(err){
         console.log('Error creating Db: ', err);
+    }
+    finally{
+        await connection.end();
     }
 }
 
