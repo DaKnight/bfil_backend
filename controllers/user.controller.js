@@ -2,7 +2,6 @@ import { createUser, getUserById, getAllUsers, updateUser, deleteUser } from "..
 
 export const registeUser = async (req, res) => {
     try{
-        console.log(req.body);
         await createUser(req.body);
         res.status(201).json({ message: "User created successfully!" });
     }
@@ -14,9 +13,9 @@ export const registeUser = async (req, res) => {
 
 export const getAllUser = async (req, res) => {
     try{
-        const users = await getAllUsers(req.params.id);
+        const users = await getAllUsers();
         if(!users){
-            return res.status(404).json({ message: "User not found!" });
+            return res.status(404).json({ message: "No user found!" });
         }
         res.status(200).json(users);
     }

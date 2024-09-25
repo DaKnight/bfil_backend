@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 import connectDb from "./db/database.js";
 import userRoutes from "./routes/user.routes.js";
+import reportRoutes from "./routes/report.routes.js";
 const server = express();
 const port = process.env.PORT || 3001;
 
@@ -12,6 +13,9 @@ server.use(express.urlencoded({ extended: true }));
 
 // User Routes
 server.use('/api/user', userRoutes);
+
+// Report Routes
+server.use('/api/report', reportRoutes);
 
 async function main(){
     try{

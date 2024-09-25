@@ -18,6 +18,8 @@ const createDailyReportTable = `CREATE TABLE IF NOT EXISTS daily_report (
         user_id INT NOT NULL,
         user_report VARCHAR(255) NOT NULL,
         file_upload VARCHAR(255) NOT NULL UNIQUE,
+        latitude VARCHAR(255) NOT NULL,
+        longitude VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         created_by VARCHAR(255) NOT NULL,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
