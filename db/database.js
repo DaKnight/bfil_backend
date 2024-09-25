@@ -1,6 +1,6 @@
 import mysql from "mysql2/promise";
 
-const createDatabase = 'CREATE DATABASE IF NOT EXISTS BFIL';
+const createDatabase = 'CREATE DATABASE IF NOT EXISTS bfil';
 const createUserTable = `CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,

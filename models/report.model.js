@@ -10,11 +10,11 @@ const getConnection = async() => {
 };
 
 export const createReport = async (reportData) => {
-    const connection = await getConnection();
-    const {user_id, user_report, file_upload, created_by} = reportData;
-    const query = `INSERT INTO daily_report (user_id, user_report, file_upload, latitude, longitude, created_by) VALUES (?, ?, ?, ?)`;
-    await connection.execute(query, [user_id, user_report, file_upload, created_by]);
-    await connection.end();
+        const connection = await getConnection();
+        const {user_id, user_report, file_upload, created_by} = reportData;
+        const query = `INSERT INTO daily_report (user_id, user_report, file_upload, latitude, longitude, created_by) VALUES (?, ?, ?, ?)`;
+        await connection.execute(query, [user_id, user_report, file_upload, created_by]);
+        await connection.end();
 };
 
 export const getAllReport = async() => {

@@ -2,8 +2,13 @@ import { createUser, getUserById, getAllUsers, updateUser, deleteUser } from "..
 
 export const registeUser = async (req, res) => {
     try{
-        await createUser(req.body);
-        res.status(201).json({ message: "User created successfully!" });
+        const check = await createUser(req.body);
+        if(check === 1){
+            res.status(201).json({ message: "User created successfully!" });
+        }else{
+            console.error('Error creating user: ', check);
+            res.status(500).json({ message:  check.code});
+        }
     }
     catch(err){
         console.error('Error creating user: ', err);
